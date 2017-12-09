@@ -1,0 +1,73 @@
+/*分数转小数，小数转分数
+0.9—》9/10
+0.5—》1/2
+0.333（3）—》1/3
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+void menu()
+{
+	printf("*************************\n");
+	printf("*******1、分数转小数*****\n");
+	printf("*******2、小数转分数*****\n");
+	printf("*******3、退出      *****\n");
+	printf("*************************\n");
+}
+void decimals()
+{
+	int molecule, denominator;
+	printf("请输入分子/分母：");
+	scanf("%d/%d", &molecule, &denominator);
+	printf("\n%d/%d的小数形式为：%lf\n", molecule, denominator, (double)molecule / denominator);
+}
+
+
+
+void grade()
+{
+	double num = 0,n,n2;
+	int i = 0, j = 0,molecule=0,denominator=1;
+	printf("请输入该小数：");
+	scanf("%lf", &num);
+	n = num;
+	while (n-(double)(int)n)
+	{
+		j++;
+		n *= 10;
+	}
+	for (i = 0; i < j;i++)
+	   denominator *= 10;
+	molecule = denominator*num;
+	for (i = molecule; i>=2; i--)
+	{
+		if (molecule%i == 0 && denominator%i == 0)
+			break;
+	}
+	if (i >= 2)
+	{ 
+	molecule /= i;
+	denominator /= i; 
+	}
+	printf("\n%lf的分数形式为：%d/%d\n", num,molecule, denominator);
+}
+int main(void)
+{
+	int key;
+	while (1)
+	{
+	menu();
+	printf("请输入操作序号：");
+	scanf("%d", &key);
+	switch (key)
+	{
+	case 1:decimals(); break;
+	case 2:grade(); break;
+	case 3:exit(0); break;
+	default:printf("请输入有效序号！！"); break;
+	}
+	}
+	system("pause");
+	return 0;
+}
